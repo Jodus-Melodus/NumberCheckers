@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Number Checkers</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="centered">
+        <h2>Welcome to Number Checkers!</h2>
+    </div>
+    <div class="centered">
+        <ul class="joinedplayernames" id="joinedplayernames"></ul>
+    </div>
+    <div class="centered">
+        <label class="playernameinput" for="playername">Enter your name: </label>
+        <input id="playername" name="playername" type="text">
+        <button onclick="newplayer()">Sumbit</button>
+    </div>
+    <div class="centered">
+        <button class="go-button" id="go-button" onclick="gotoGameWindow()">GO !</button>
+    </div>
+    <script src="script.js" async defer></script>
+</body>
+
+</html>
