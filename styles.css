@@ -4,6 +4,11 @@ body {
     color: white;
 }
 
+a {
+    color: rgb(88, 182, 0);
+    text-decoration: none;
+}
+
 button {
     color: white;
     background-color: rgb(72, 72, 72);
