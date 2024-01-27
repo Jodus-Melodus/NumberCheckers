@@ -25,6 +25,13 @@ button {
     text-align: center;
 }
 
+.game-go-button {
+    margin: 30px;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+}
+
 .playernameinput {
     padding-right: 20px;
 }

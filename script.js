@@ -110,6 +110,8 @@ function startGame() {
         }
     });
 
+    document.getElementById("game-go-button").remove();
+
     startTime = Date.now();
     restartTimer();
 
