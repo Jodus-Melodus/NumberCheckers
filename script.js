@@ -1,7 +1,7 @@
 let usedNumbers = [];
 let playerNames = [];
 let turnIndex = 0;
-const duration = 20000;
+const duration = 10000;
 let startTime;
 let timer;
 let interval;
