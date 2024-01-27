@@ -35,7 +35,7 @@ function stackDivs() {
 
 function newCard(value) {
     const deck = document.getElementById("deck");
-    const rotationAngle = getRandomInRange(-35, 35);
+    const rotationAngle = getRandomInRange(-30, 30);
     const card = document.createElement("div");
     card.className = "card";
     card.style.transform = `rotate(${rotationAngle}deg)`;
