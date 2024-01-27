@@ -48,12 +48,17 @@ function newCard(value) {
 function submit() {
     const value = parseInt(document.getElementById("number").value);
 
+    if ((value < 0) || (value > 100)) {
+        gameOver("This number is too large or small.");
+        return;
+    }
+
     if (usedNumbers.includes(value)) {
-        gameOver("Game Over!\nThis number has already been entered.");
+        gameOver("This number has already been entered.");
         return;
     }
     if (value % 2 !== 0) {
-        gameOver("Game Over!\nThe number is supposed to be an even number.");
+        gameOver("The number is supposed to be an even number.");
         return;
     }
 
