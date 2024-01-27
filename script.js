@@ -28,6 +28,8 @@ function getRandomInRange(min, max) {
 
 function stackDivs() {
     const divs = document.querySelectorAll('.card');
+    const first = divs[0];
+
     divs.forEach((div, index) => {
         div.style.zIndex = index;
     });
@@ -86,7 +88,7 @@ function newplayer() {
 }
 
 function updatePlayerTurn() {
-    document.getElementById("player-turn").innerHTML = `Turn: -${playerNames[turnIndex]}-`;
+    document.getElementById("player-turn").innerHTML = `Turn: ${playerNames[turnIndex]}`;
     turnIndex = (turnIndex + 1) % playerNames.length;
 }
 
