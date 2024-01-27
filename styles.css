@@ -53,4 +53,7 @@ button:hover {
     place-items: center;
     margin-top: 200px;
     background-color: rgb(74, 74, 74);
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 5px;
 }

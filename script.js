@@ -1,18 +1,20 @@
 let usedNumbers = [];
 let playerNames = [];
-let TurnIndex = 0;
+let turnIndex = 0;
 const duration = 20000;
 let startTime;
 let timer;
+let interval;
 
 function gameOver(msg) {
     updatePlayerTurn();
-    alert(msg + "\n'" + playerNames[TurnIndex] + "' wins!");
+    alert(`Game Over!\n${msg}\n'${playerNames[turnIndex]}' wins!`);
     clearTimeout(timer);
+    clearInterval(interval);
 }
 
 function timerCallback() {
-    gameOver("Your time ran out!")
+    gameOver("Your time ran out!");
 }
 
 function getTimeRemaining() {
@@ -25,19 +27,18 @@ function getRandomInRange(min, max) {
 }
 
 function stackDivs() {
-    var divs = document.querySelectorAll('.card');
-
-    divs.forEach(function (div, index) {
+    const divs = document.querySelectorAll('.card');
+    divs.forEach((div, index) => {
         div.style.zIndex = index;
     });
 }
 
 function newCard(value) {
-    var deck = document.getElementById("deck");
-    var rotationAngle = getRandomInRange(-35, 35);
-    var card = document.createElement("div");
+    const deck = document.getElementById("deck");
+    const rotationAngle = getRandomInRange(-35, 35);
+    const card = document.createElement("div");
     card.className = "card";
-    card.style.transform = "rotate(" + rotationAngle + "deg)";
+    card.style.transform = `rotate(${rotationAngle}deg)`;
 
     card.appendChild(document.createTextNode(value));
     deck.appendChild(card);
@@ -45,73 +46,74 @@ function newCard(value) {
 }
 
 function submit() {
-    var value = parseInt(document.getElementById("number").value);
+    const value = parseInt(document.getElementById("number").value);
 
     if (usedNumbers.includes(value)) {
         gameOver("Game Over!\nThis number has already been entered.");
+        return;
     }
-    else if (value % 2 == 0) {
-        usedNumbers.push(value);
-        newCard(value);
+    if (value % 2 !== 0) {
+        gameOver("Game Over!\nThe number is supposed to be an even number.");
+        return;
     }
-    else {
-        gameOver("Game Over!\nThe number is supposed to be an even number.")
-    }
+
+    usedNumbers.push(value);
+    newCard(value);
+    restartTimer();
     updatePlayerTurn();
     document.getElementById("number").value = "";
 }
 
 function newplayer() {
-    var playerNameComponent = document.getElementById("playername");
-    var playersComponent = document.getElementById("joinedplayernames");
-    var playername = playerNameComponent.value;
+    const playerNameComponent = document.getElementById("playername");
+    const playersComponent = document.getElementById("joinedplayernames");
+    const playername = playerNameComponent.value;
 
-    if (playername != "") {
-
-        if (playerNames.includes(playername)) {
-            alert("That player's name is already in use.");
-            return;
-        } else {
-            playerNames.push(playername);
-
-            var newPlayerName = document.createElement("li");
-            newPlayerName.appendChild(document.createTextNode(playername));
-            playersComponent.appendChild(newPlayerName);
-        }
+    if (playername && !playerNames.includes(playername)) {
+        playerNames.push(playername);
+        const newPlayerName = document.createElement("li");
+        newPlayerName.appendChild(document.createTextNode(playername));
+        playersComponent.appendChild(newPlayerName);
+    } else if (playerNames.includes(playername)) {
+        alert(`'${playername}' is already in use.`);
     }
     playerNameComponent.value = "";
 }
 
 function updatePlayerTurn() {
-    document.getElementById("player-turn").innerHTML = "Turn: -" + playerNames[TurnIndex] + "-";
-    TurnIndex = (TurnIndex + 1) % playerNames.length;
+    document.getElementById("player-turn").innerHTML = `Turn: -${playerNames[turnIndex]}-`;
+    turnIndex = (turnIndex + 1) % playerNames.length;
 }
 
 function gotoGameWindow() {
     localStorage.setItem("playerNames", JSON.stringify(playerNames));
     window.location.href = "game.html";
-};
+}
+
+function restartTimer() {
+    clearInterval(timer);
+    startTime = Date.now();
+}
 
 function startGame() {
     playerNames = JSON.parse(localStorage.getItem("playerNames"));
     updatePlayerTurn();
 
-    document.getElementById("number").addEventListener("keydown", function (event) {
+    document.getElementById("number").addEventListener("keydown", event => {
         if (event.key === "Enter") {
             submit();
         }
     });
 
     startTime = Date.now();
-    timer = setTimeout(timerCallback, duration);
+    restartTimer();
 
-    const interval = setInterval(() => {
-        console.log("Time remaining: " + getTimeRemaining() + " milliseconds");
+    interval = window.setInterval(() => {
+        document.getElementById("time-remaining").innerHTML = Math.trunc(getTimeRemaining() / 1000);
     }, 1000);
+}
 
-};
-
-document.getElementById("playername").addEventListener("keydown", function (event) {
+document.getElementById("playername").addEventListener("keydown", event => {
     if (event.key === "Enter") {
         newplayer();
     }

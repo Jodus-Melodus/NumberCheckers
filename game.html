@@ -13,16 +13,17 @@
 <body>
     <h1 class="centered">Number Checkers!</h1>
     <h3 class="centered" id="player-turn">Turn: </h3>
-    <div class="centered">
-        <button id="game-go-button" onclick="startGame()">GO</button>
-    </div>
     <div class="card-deck" id="deck">
         <div class="card">22</div>
     </div>
     <div class="centered">
-        <input class="centered" type="number" id="number">
+        <button id="game-go-button" onclick="startGame()">GO</button>
     </div>
     <div class="centered">
+        <input class="centered" type="number" id="number">
+    </div>
+    <div class="centered" id="time-remaining">
+        20
     </div>
     <script src="script.js" async defer></script>
 </body>
